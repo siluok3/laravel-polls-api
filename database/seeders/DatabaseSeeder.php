@@ -1,18 +1,17 @@
 <?php
 
-namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
-     *
-     * @return void
+     * Run the database seeds.
      */
     public function run()
     {
-        // User::factory(10)->create();
+        App\Models\User::factory()->count(5)->create();
+        App\Models\Poll::factory()->count(30)->create();
+        App\Models\Question::factory()->count(50)->create();
+        App\Models\Answer::factory()->count(500)->create();
     }
 }
