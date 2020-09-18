@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Poll as ResourcesPoll;
 use App\Models\Poll;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -21,7 +22,9 @@ class PollsController extends Controller
             return response()->json(null, 404);
         }
 
-        return response()->json(Poll::findOrFail($id), 200);
+        $formattedResponse = new ResourcesPoll(Poll::findOrFail($id), 200);
+
+        return response()->json($formattedResponse, 200);
     }
 
     public function store(Request $request): JsonResponse
@@ -57,5 +60,12 @@ class PollsController extends Controller
     public function errors(): JsonResponse
     {
         return response()->json(['message' => 'Oops, not implemented yet'], 501);
+    }
+
+    public function questions(Poll $poll): JsonResponse
+    {
+        $questions = $poll->questions;
+
+        return response()->json($questions, 200);
     }
 }
