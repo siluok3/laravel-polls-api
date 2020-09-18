@@ -12,17 +12,15 @@ class PollsController extends Controller
 {
     public function index(): JsonResponse
     {
-        return response()->json(Poll::get(), 200);
+        return response()->json(Poll::paginate(1), 200);
     }
 
     public function show(int $id): JsonResponse
     {
-        $poll = Poll::find($id);
-        if (is_null($poll)) {
-            return response()->json(null, 404);
-        }
-
-        $formattedResponse = new ResourcesPoll(Poll::findOrFail($id), 200);
+        $poll = Poll::with('questions')->findOrFail($id);
+        $response['poll'] = $poll;
+        $response['questions'] = $poll->questions;
+        $formattedResponse = new ResourcesPoll($response, 200);
 
         return response()->json($formattedResponse, 200);
     }

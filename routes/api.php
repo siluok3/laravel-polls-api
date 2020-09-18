@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FilesController;
 use App\Http\Controllers\PollsController;
 use App\Http\Controllers\QuestionsController;
 use Illuminate\Http\Request;
@@ -31,3 +32,7 @@ Route::get('polls/{poll}/questions', [PollsController::class, 'questions']);
 
 //Questions
 Route::apiResource('questions', QuestionsController::class);
+
+//Files
+Route::get('/files/get', [FilesController::class, 'show']);
+Route::post('/files/create', [FilesController::class, 'create']);

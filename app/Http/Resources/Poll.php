@@ -13,8 +13,6 @@ class Poll extends JsonResource
      */
     public function toArray($request): array
     {
-        return [
-            'title' => $this->title.'.',
-        ];
+        return parent::toArray($request);
     }
 }
