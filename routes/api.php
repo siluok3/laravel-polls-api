@@ -24,3 +24,4 @@ Route::get('polls/{id}', [PollsController::class, 'show']);
 Route::post('polls', [PollsController::class, 'store']);
 Route::put('polls/{poll}', [PollsController::class, 'update']);
 Route::delete('polls/{poll}', [PollsController::class, 'delete']);
+Route::any('errors', [PollsController::class, 'errors']);
